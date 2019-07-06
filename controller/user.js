@@ -37,10 +37,11 @@ class UserController{
 
             this.saveToken(user._id, token);
 
+            user.token = token;
+
             return {
                 status: "success",
                 data: user,
-                token
             };
 
         } catch(error){

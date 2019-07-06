@@ -1,9 +1,14 @@
 const server = require("express")();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const config = require("./../config/config");
 const userController = require('./../controller/user');
 
+server.use(cors({
+	origin: 'http://localhost',
+	// credentials: true
+}));
 server.use("/", (req, res, next) => {
 	let { protocal, host, port, name } = config.app.db;
 	mongoose.connect(`${protocal}${host}:${port}/${name}`, { useNewUrlParser: true });
