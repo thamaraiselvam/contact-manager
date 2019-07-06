@@ -4,6 +4,7 @@ const errorHandler = require('./../util/error.handler');
 class contactController{
 	async add(newContact){
 		try{
+			newContact = {...newContact, ...{userId: userSession.id}}
 			let response = await contactSchema.create(newContact);
 			return {
 				status: "success",
@@ -19,7 +20,7 @@ class contactController{
 
 	async update(id, update){
 		try{
-			let response = await contactSchema.updateOne({_id: id}, update);
+			let response = await contactSchema.updateOne({_id: id, userId: userSession.id}, update);
 			return {
 				status: "success",
 				response: response
@@ -34,7 +35,7 @@ class contactController{
 
 	async fetch(){
 		try{
-			let response = await contactSchema.find({});
+			let response = await contactSchema.find({userId: userSession.id});
 			return {
 				status: "success",
 				response: response
@@ -49,7 +50,7 @@ class contactController{
 
 	async delete(id){
 		try{
-			let response = await contactSchema.deleteOne({_id: id});
+			let response = await contactSchema.deleteOne({_id: id, userId: userSession.id});
 			return {
 				status: "success",
 				response: response

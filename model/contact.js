@@ -1,27 +1,18 @@
 const mongoose = require("mongoose");
 
 const contactSchema = new mongoose.Schema({
-	name: {
+	userId: {
 		type: String,
 		required: true
 	},
-	email: {
+	name: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	phone: {
 		type: String,
 		required: true,
 		unique: true
-	},
-	city: {
-		type: String,
-		required: true
-	},
-	favorite: {
-		type: Boolean,
-		default: false
 	}
 });
 
